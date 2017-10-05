@@ -47,11 +47,16 @@ public class Client4A{
     		  System.out.println(welcome);
     		 
     		  
-    		  
-    		  
-    		  
+    		  //sending message to the server 
+    		  while(true){
+    			  System.out.println("Enter message to the server");
+    			  String msg = input.nextLine();
+    			  toServer.println(msg);
+    			  msg = fromServer.readLine().trim();
+    			  System.out.println(msg);
+    		  }
     		
-    		  
+    	
     	}finally{
     		clientSocket.close();
     	}

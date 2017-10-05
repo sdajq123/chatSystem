@@ -39,9 +39,10 @@ public class MainServer {
 			if(role.equals("Customer")){
 				toClient.println("Welcome to our chat system customer");//until here test okay already 
 				//create 2 threads for the customer 
+				
 				//CustomerThread[] customerthreads = new CustomerThread[2];
-				//CustomerThread clientThread = new CustomerThread(clientSocket,customerthreads);
-				//clientThread.start();
+				CustomerThread2 cusomterThread = new CustomerThread2(clientSocket);
+				cusomterThread.run();
 				
 				
 				
