@@ -4,12 +4,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 
 public class MainServer {
 	private static ServerSocket serverSocket = null;
 	private static Socket clientSocket = null;
-	
+	private static ArrayList<Socket> customerTa = new ArrayList<Socket>();
+	private static ArrayList<Socket> agentTa = new ArrayList<Socket>();
 
 	  public static void main(String args[]) {
 	    int portNumber = 8080;
@@ -39,10 +41,10 @@ public class MainServer {
 			if(role.equals("Customer")){
 				toClient.println("Welcome to our chat system customer");//until here test okay already 
 				//create 2 threads for the customer 
-				
+				customerTa.add(clientSocket);
 				//CustomerThread[] customerthreads = new CustomerThread[2];
-				CustomerThread2 cusomterThread = new CustomerThread2(clientSocket);
-				cusomterThread.run();
+				CustomerThread cusomterThread = new CustomerThread(clientSocket,customerTa);
+				cusomterThread.start();
 				
 				
 				
@@ -51,8 +53,8 @@ public class MainServer {
 			else if(role.equals("Agent")){
 				toClient.println("Welcome to our chat system agent");
 				//create 1 thread for agent
-				//AgentThread agentThread = new AgentThread(clientSocket);
-				//agentThread.start();
+				AgentThread agentThread = new AgentThread(clientSocket);
+				agentThread.start();
 			}
 			
 	         }

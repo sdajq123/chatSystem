@@ -46,14 +46,14 @@ public class Client4A{
     		  welcome = fromServer.readLine();
     		  System.out.println(welcome);
     		 
-    		  
+    		  System.out.println("Enter message to the server");
     		  //sending message to the server 
     		  while(true){
-    			  System.out.println("Enter message to the server");
-    			  String msg = input.nextLine();
-    			  toServer.println(msg);
-    			  msg = fromServer.readLine().trim();
-    			  System.out.println(msg);
+    			  System.out.print("> ");
+    			  String msgsend = input.nextLine();
+    			  toServer.println(msgsend);
+    			  String msgrd = fromServer.readLine().trim();
+    			  System.out.println(msgrd);
     		  }
     		
     	
