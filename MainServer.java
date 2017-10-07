@@ -12,7 +12,8 @@ public class MainServer {
 	private static Socket clientSocket = null;
 	private static ArrayList<Socket> customerTa = new ArrayList<Socket>();
 	private static ArrayList<Socket> agentTa = new ArrayList<Socket>();
-
+    public static  String linefromCustomer = null;
+    public static String linefromAgent = null;
 	  public static void main(String args[]) {
 	    int portNumber = 8080;
 	    
@@ -43,18 +44,26 @@ public class MainServer {
 				//create 2 threads for the customer 
 				customerTa.add(clientSocket);
 				//CustomerThread[] customerthreads = new CustomerThread[2];
-				CustomerThread cusomterThread = new CustomerThread(clientSocket,customerTa);
-				cusomterThread.start();
-				
-				
-				
+				/*if(agentTa.size()==0){
+					toClient.println("no agent");
+					break;
+				}*/
+				CustomerThread customerThread = new CustomerThread(clientSocket);
+				customerThread.start();
+				linefromCustomer = customerThread.linefromCustomer;
+				customerThread.write(linefromAgent);
 			}
 			//check if the role is agent 
 			else if(role.equals("Agent")){
 				toClient.println("Welcome to our chat system agent");
 				//create 1 thread for agent
+				agentTa.add(clientSocket);
 				AgentThread agentThread = new AgentThread(clientSocket);
+				
 				agentThread.start();
+				linefromAgent = agentThread.linefromAgent;
+				agentThread.write(linefromCustomer);
+				
 			}
 			
 	         }
