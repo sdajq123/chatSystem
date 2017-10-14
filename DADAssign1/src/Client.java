@@ -36,6 +36,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
 import java.io.*;
 import java.net.*;
 
@@ -316,7 +318,18 @@ public class Client extends Application{
 		
 		/*
 		 * BUTTON ACTIONS
+		 * 
 		 */
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	              System.out.println("Stage is closing");
+	              int dialogButton = JOptionPane.CANCEL_OPTION;
+          		  dialogButton = JOptionPane.showConfirmDialog(null, "Stage is closing", "Inccorect Password", dialogButton);
+          		  
+          		  	System.exit(0);
+          		
+	          }
+	      }); 
 		
 		//Save Message (Agent Only)
 		SaveMsg.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
