@@ -46,7 +46,7 @@ public class Client4A{
     		  welcome = fromServer.readLine();
     		  System.out.println(welcome);
     		 
-    		  System.out.println("Enter message to the server");
+    		  //System.out.println("Enter message to the server");
     		  //sending message to the server 
     		  while(true){
     			  System.out.print("> ");
